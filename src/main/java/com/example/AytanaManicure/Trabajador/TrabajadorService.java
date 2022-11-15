@@ -46,5 +46,13 @@ public class TrabajadorService implements ITrabajadorService{
     public List<Trabajador> OrdenDescendente() {
         return data.OrderDesc();
     }
-    
+
+    @Override
+    public Boolean ExisteEmail(String email) {
+        if (data.buscarEmail(email) == email)
+            return true;
+
+        else
+            return false;
+    }
 }

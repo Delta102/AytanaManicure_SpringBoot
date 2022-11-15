@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datos Personales</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/vendor/animate/animate.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/vendor/css-hamburgers/hamburgers.min.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/vendor/select2/select2.min.css}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+  </head>
+  <body>
+    <div class="limiter">
+      <div class="container-login100">
+        <div class="wrap-login100">
+          <div class="login100-pic js-tilt" data-tilt>
+            <img
+              th:src="@{/image/logo5.png}"
+              alt="No encontrada"
+              class="mockup"
+            />
+          </div>
+
+          <form
+            action="agendar"
+            class="login100-form validate-form"
+            id="account"
+            method="post"
+          >
+            <span class="login100-form-title"> AYTANA-MANICURE </span>
+
+            <span class="login100-form-title">
+              Datos Personales
+            </span>
+
+            <div class="wrap-input100 validate-input">
+              <input
+                type="date"
+                name="fecha"
+                class="input100"
+                aria-required="true"
+                placeholder="Fecha:"
+                style="position: relative; right: -1.5em"
+              />
+              <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <div class="wrap-input100 validate-input">
+              <input
+                type="time"
+                name="hora"
+                class="input100"
+                aria-required="true"
+                placeholder="Hora:"
+                style="position: relative; right: -1.5em"
+              />
+              <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </span>
+            </div>
+
+
+
+            <div class="wrap-input100 validate-input">
+              <input
+                name="trabajador"
+                class="input100"
+                aria-required="true"
+                placeholder="Trabajador:"
+                style="position: relative; right: -1.5em"
+              />
+              <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </span>
+            </div>
+
+
+            <div class="wrap-input100 validate-input">
+              <input
+                name="estado"
+                class="input100"
+                aria-required="true"
+                placeholder="Estado:"
+                value="SIN ACTIVAR"
+                style="position: relative; right: -1.5em"
+              />
+              <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </span>
+            </div>
+
+
+            <div class="wrap-input100 validate-input" >
+              
+              <input
+                name="usuario"
+                class="input100"
+                aria-required="true"
+                placeholder="Estado:"
+                th:value="${usuario}"
+                style="position: relative; right: -1.5em"
+              />
+              <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </span>
+            </div>
+
+
+
+            <div class="container-login100-form-btn">
+              <button
+                class="login100-form-btn"
+                id="registerSubmit"
+                type="submit"
+              >
+                Continuar
+              </button>
+              <br /><br /><br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

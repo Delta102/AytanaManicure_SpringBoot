@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @RequestMapping("/trabajador/")
 @Controller
 public class ControladorTrabajador {
@@ -20,7 +21,7 @@ public class ControladorTrabajador {
     @GetMapping("/registro")
     public String Nuevo()
     {
-        return "registro"; //nuevo.html
+        return carpeta + "registro"; // nuevo.html
     }
 
 
@@ -32,16 +33,22 @@ public class ControladorTrabajador {
     }
 
     @PostMapping("/registrar")
-    public String CrearTrabajador (@RequestParam("nom") String nom, @RequestParam("ape") String ape,
-    Model model){
+    public String CrearTrabajador(@RequestParam("nombre") String nom, @RequestParam("apellidos") String ape,
+            @RequestParam("email") String mail, @RequestParam("password") String password,
+            @RequestParam("tipo") String tipo, Model model) {
 
         Trabajador t = new Trabajador();
 
-        t.setNombre(nom);
-        t.setApellido(ape);
+        if (!service.ExisteEmail(mail)) {
+            t.setNombre(nom);
+            t.setApellidos(ape);
 
-        service.Guardar(t);
+            t.setEmail(mail);
+            t.setPassword(password);
+            t.setTipo(tipo);
+            service.Guardar(t);
+        }
 
-        return carpeta+"listartrabajadores";
+        return carpeta + "Index";
     }
 }

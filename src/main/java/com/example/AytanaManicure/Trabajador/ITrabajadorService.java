@@ -9,6 +9,9 @@ public interface ITrabajadorService {
     public Optional<Trabajador> ConsultarId(int id);
     public void Guardar(Trabajador p);
     public void Eliminar(int id);
+
+    public Boolean ExisteEmail(String email);
+
     public List<Trabajador> Buscar(String dato);
     public List<Trabajador> OrdenAscendente();
     public List<Trabajador> OrdenDescendente();

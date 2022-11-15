@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <!--<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<!--===============================================================================================-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <!--===============================================================================================-->
+</head>
+
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-pic js-tilt" data-tilt>
+                    <img th:src="@{/image/logo5.png}" alt="No encontrada" class="mockup">
+                </div>
+
+                <form action="registrar" class="login100-form validate-form" id="account" method="post">
+                    <span class="login100-form-title">
+                        AYTANA-MANICURE
+                    </span>
+
+                    <span class="login100-form-title">
+                        CREACIÓN DE USUARIO TRABAJADOR
+                    </span>
+
+                    <div class="wrap-input100 validate-input">
+                        <input name="nombre" class="input100" autocomplete="username" aria-required="true"
+                            placeholder="Nombres" style="position: relative;
+  right: -1.5em;" />
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input name="apellidos" class="input100" autocomplete="username" aria-required="true"
+                            placeholder="Apellidos:" style="position: relative;
+  right: -1.5em;" />
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input name="email" class="input100" aria-required="true" placeholder="Correo Electrónico:"
+                            style="position: relative;
+  right: -1.5em;" />
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+
+                    <div class="wrap-input100 validate-input">
+                        <input name="password" class="input100" aria-required="true" placeholder="Password" required=""
+                            style="position: relative;
+  right: -1.5em;" />
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="form-group form-row mt-2">
+                        <label>Tipo de usuario</label>
+                        <div class="col-md-10 pt-1">
+                            <div class="form-check form-check-inline"> <input class="form-check-input" type="radio"
+                                    name="tipo" id="inlineRadio1" value="USUARIO" required> <label
+                                    class="form-check-label" for="inlineRadio1">USUARIO</label> </div>
+                            <div class="form-check form-check-inline"> <input class="form-check-input" type="radio"
+                                    name="tipo" id="inlineRadio2" value="ADMIN" required> <label
+                                    class="form-check-label" for="inlineRadio2">ADMIN</label> </div>
+                        </div>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" id="registerSubmit" type="submit">
+                            Registrar Datos
+                        </button>
+                        <br><br><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

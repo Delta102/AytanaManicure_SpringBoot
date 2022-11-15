@@ -18,4 +18,7 @@ public interface ITrabajador extends CrudRepository<Trabajador, Integer> {
     @Query(value="SELECT * FROM trabajador "
             + "ORDER BY nombre DESC",nativeQuery=true)
     List<Trabajador> OrderDesc();
+
+    @Query(value = "SELECT email FROM trabajador" + "WHERE email LIKE usuario@usuario.pe", nativeQuery = true)
+    String buscarEmail(String email);
 }
