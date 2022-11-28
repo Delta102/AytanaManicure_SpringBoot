@@ -1,12 +1,15 @@
 package com.example.AytanaManicure.Usuario;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UsuarioService implements IUsuarioService {
+
     @Autowired
     private IUsuario data;
 
@@ -19,4 +22,5 @@ public class UsuarioService implements IUsuarioService {
     public Optional<Usuario> FindById(int id) {
         return data.findById(id);
     }
+
 }

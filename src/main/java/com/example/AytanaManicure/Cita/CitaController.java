@@ -1,6 +1,8 @@
 package com.example.AytanaManicure.Cita;
 
 import java.text.ParseException;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.AytanaManicure.Usuario.IUsuarioService;
 import com.example.AytanaManicure.Usuario.Usuario;
 
-import lombok.var;
+
 
 @RequestMapping("/cita/")
 @Controller
@@ -63,10 +65,19 @@ public class CitaController {
         c.setHoraCita(fromTime);
         c.setEstadoCita(estado);
         c.setNombreTrabajador(trabajador);
-        var user = userService.FindById(id);
+        Optional<Usuario> user = userService.FindById(id);
         c.setUsuario(user.get());
         citaService.Guardar(c);
 
-        return "Index";
+        return "../Index";
+    }
+
+    @GetMapping("/listaCitas")
+    public String ListarCitas(Model model) {
+
+        List<Cita> citas = citaService.Listar();
+        model.addAttribute("citas", citas);
+
+        return carpeta + "ListaCitas";
     }
 }

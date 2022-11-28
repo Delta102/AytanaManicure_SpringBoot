@@ -20,13 +20,15 @@
                 </div>
                 <div class="links">
                     <partial name="_LoginPartial" />
-                    <a class="link" href="#">Inicio</a>
-                    <a href="#" text="NUESTROS PRINCIPALES SERVICIOS" class="link link--active">Servicios</a>
-                    <a class="link link--active">Servicios</a>
-                    <a href="#" class="link">Proyectos</a>
-                    <a href="#" class="link link--active">Clientes</a>
-                    <a class="link" a th:href="@{trabajador/registro}">Crear Trabajador</a>
-                    <a href="#" class="link link--active">Contacto</a>
+                    <a sec:authorize="!isAuthenticated()" class="link" href="#">Inicio</a>
+                    <a sec:authorize="!isAuthenticated()" href="#" text="NUESTROS PRINCIPALES SERVICIOS" class="link link--active">Servicios</a>
+                    <a sec:authorize="!isAuthenticated()" href="#" class="link">Proyectos</a>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{trabajador/login}" class="link link--active">Iniciar Sesión</a>
+                    <a sec:authorize="isAuthenticated()" href="#" class="link link--active">Bienvenido [[${#httpServletRequest.remoteUser}]]!</a>
+                    <a sec:authorize="isAuthenticated()" class="link" a th:href="@{trabajador/registro}">Crear Trabajador</a>
+                    <a sec:authorize="!isAuthenticated()" href="#" class="link link--active">Contacto</a>
+                    <a sec:authorize="isAuthenticated()" class="link link--active" th:href="@{cita/listaCitas}">Ver citas disponibles</a>
+                    <a sec:authorize="isAuthenticated()" class="link" th:href="@{trabajador/logout}">Cerrar sesión</a>
                 </div>
             </div>
         </nav>
@@ -41,7 +43,7 @@
                     <span class="copy__active">siguiente nivel</span>
                 </p>
 
-                <!--<a class="cta2" th:href="@{cita/registroUsuario}>Agenda una cita</a>-->
+                <a class="cta2" th:href="@{cita/registrarUsuario}">Agenda una cita</a>
             </div>
             <img th:src="@{/image/logo5.png}" alt="No encontrada" class="mockup">
         </section>

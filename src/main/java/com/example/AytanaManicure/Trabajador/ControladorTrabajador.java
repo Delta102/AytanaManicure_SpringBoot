@@ -2,11 +2,10 @@ package com.example.AytanaManicure.Trabajador;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RequestMapping("/trabajador/")
@@ -21,34 +20,25 @@ public class ControladorTrabajador {
     @GetMapping("/registro")
     public String Nuevo()
     {
+
         return carpeta + "registro"; // nuevo.html
     }
 
-
-    @GetMapping("/")
-    public String Mostrar (){
-        //List<Trabajador> trabajadores = service.Listar();
-        //model.addAttribute("trabajadores", trabajadores);
-        return carpeta+"listartrabajadores";
+    @ModelAttribute("trabajador")
+    public TrabajadorRegistroDTO retornarNuevoRegistroUsuarioDTO() {
+        return new TrabajadorRegistroDTO();
     }
 
-    @PostMapping("/registrar")
-    public String CrearTrabajador(@RequestParam("nombre") String nom, @RequestParam("apellidos") String ape,
-            @RequestParam("email") String mail, @RequestParam("password") String password,
-            @RequestParam("tipo") String tipo, Model model) {
 
-        Trabajador t = new Trabajador();
+    @PostMapping("registrar")
+    public String CrearTrabajador(@ModelAttribute("trabajador") TrabajadorRegistroDTO registroDTO) {
+        service.Guardar(registroDTO);
 
-        if (!service.ExisteEmail(mail)) {
-            t.setNombre(nom);
-            t.setApellidos(ape);
+        return "redirect:/trabajador/registro?exito";
+    }
 
-            t.setEmail(mail);
-            t.setPassword(password);
-            t.setTipo(tipo);
-            service.Guardar(t);
-        }
-
-        return carpeta + "Index";
+    @GetMapping("login")
+    public String iniciarSesion() {
+        return carpeta + "login";
     }
 }

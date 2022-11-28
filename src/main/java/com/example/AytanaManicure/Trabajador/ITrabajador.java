@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ITrabajador extends CrudRepository<Trabajador, Integer> {
+public interface ITrabajador extends CrudRepository<Trabajador, Long> {
     @Query(value="SELECT * FROM trabajador" + "WHERE nombre LIKE %1%?", nativeQuery = true)
     List<Trabajador> buscarPorTodo(String dato);
 
@@ -19,6 +19,6 @@ public interface ITrabajador extends CrudRepository<Trabajador, Integer> {
             + "ORDER BY nombre DESC",nativeQuery=true)
     List<Trabajador> OrderDesc();
 
-    @Query(value = "SELECT email FROM trabajador" + "WHERE email LIKE usuario@usuario.pe", nativeQuery = true)
-    String buscarEmail(String email);
+    @Query(value = "SELECT * FROM trabajador WHERE email = :emailTemp", nativeQuery = true)
+    public Trabajador buscarEmail(String emailTemp);
 }
