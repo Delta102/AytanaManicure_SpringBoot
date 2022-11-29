@@ -4,6 +4,7 @@
     <title>Listado de Eventos</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link
       rel="stylesheet"
@@ -52,21 +53,21 @@
                 event.preventDefault();
 
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Seguro de eliminar?',
+                    text: "Esto no se podrá revertir!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!',
+                    confirmButtonText: 'Confirmar!',
                     allowOutsideClick: false,
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
 
                         Swal.fire({
-                            title: 'Deleted!',
-                            text: 'Your file has been deleted.',
+                            title: 'Eliminado!',
+                            text: 'La cita fue eliminada con éxito',
                             icon: 'success',
                             allowOutsideClick: false,
                             allowEscapeKey: false

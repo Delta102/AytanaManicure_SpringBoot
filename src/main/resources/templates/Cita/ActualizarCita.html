@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,6 +50,41 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      function Actualizar() {
+        event.preventDefault();
+
+        Swal.fire({
+          title: "Seguro de actualizar la cita?",
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Confirmar",
+          denyButtonText: `Cancelar`,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "Actualizado!",
+              text: "",
+              icon: "success",
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                const formulario = document.getElementById("actualizar");
+                formulario.submit();
+              }
+            });
+          } else if (result.isDenied) {
+            Swal.fire("Cambios no Guardados", "", "info");
+          }
+        });
+      }
+    </script>
   </head>
   <body>
     <div class="limiter">
@@ -63,13 +97,23 @@
           <form
             class="login100-form validate-form"
             th:action="@{/cita/editarTrabajador}"
-            id="account"
+            id="actualizar"
             method="post"
           >
             <span class="login100-form-title"> Aytana Manicure </span>
 
-            <span th:if="${cita.nombreTrabajador} != ${#authentication.name}" class="login100-form-title"> Desea Encargarse de esta Cita? </span>
-            <span th:if="${cita.nombreTrabajador} == ${#authentication.name}" class="login100-form-title"> Desea Activar su Cita? </span>
+            <span
+              th:if="${cita.nombreTrabajador} != ${#authentication.name}"
+              class="login100-form-title"
+            >
+              Desea Encargarse de esta Cita?
+            </span>
+            <span
+              th:if="${cita.nombreTrabajador} == ${#authentication.name}"
+              class="login100-form-title"
+            >
+              Desea Activar su Cita?
+            </span>
 
             <div class="wrap-input100 validate-input">
               <input
@@ -81,59 +125,65 @@
                 aria-required="true"
                 placeholder="Email"
                 th:if="${cita.nombreTrabajador} == 'SIN TRABAJADOR'"
-                th:value = "${cita.nombreTrabajador}"
-                style="position: relative; right: -1.5em" >
-                
-                <input
-                    type="button"
-                    id="Input_Email"
-                    name="actualizar"
-                    class="input100 btn btn-warning"
-                    autocomplete="username"
-                    aria-required="true"
-                    placeholder="Email"
-                    th:if="${cita.nombreTrabajador} == ${#authentication.name}"
-                    th:value = "${cita.estadoCita}"
-                    style="position: relative; right: -1.5em" >
+                th:value="${cita.nombreTrabajador}"
+                style="position: relative; right: -1.5em"
+              />
 
+              <input
+                type="button"
+                id="Input_Email"
+                name="actualizar"
+                class="input100 btn btn-warning"
+                autocomplete="username"
+                aria-required="true"
+                placeholder="Email"
+                th:if="${cita.nombreTrabajador} == ${#authentication.name}"
+                th:value="${cita.estadoCita}"
+                style="position: relative; right: -1.5em"
+              />
             </div>
             <center>
-                <br>
-                <p>
-                    <img width="50em" style="position: relative; right: -1.5em" src="https://cdn-icons-png.flaticon.com/512/1053/1053186.png" alt="">
-                </p>
-                <br>
+              <br />
+              <p>
+                <img
+                  width="50em"
+                  style="position: relative; right: -1.5em"
+                  src="https://cdn-icons-png.flaticon.com/512/1053/1053186.png"
+                  alt=""
+                />
+              </p>
+              <br />
             </center>
-            
+
             <div class="wrap-input100 validate-input">
-                <input
-                  id="Input_Email"
-                  name="actualizar"
-                  class="input100 btn btn-primary"
-                  autocomplete="username"
-                  aria-required="true"
-                  th:if="${cita.nombreTrabajador} != ${#authentication.name}"
-                  placeholder="Email"
-                  th:value = "${mail}"
-                  style="position: relative; right: -1.5em"
-                />
+              <input
+                id="Input_Email"
+                name="actualizar"
+                class="input100 btn btn-primary"
+                autocomplete="username"
+                aria-required="true"
+                th:if="${cita.nombreTrabajador} != ${#authentication.name}"
+                placeholder="Email"
+                th:value="${mail}"
+                style="position: relative; right: -1.5em"
+              />
 
-                <input
-                  id="Input_Email"
-                  name="actualizar"
-                  class="input100 btn btn-primary"
-                  autocomplete="username"
-                  aria-required="true"
-                  th:if="${cita.nombreTrabajador} == ${#authentication.name}"
-                  placeholder="Email"
-                  value="ACTIVADO"
-                  style="position: relative; right: -1.5em"
-                />
+              <input
+                id="Input_Email"
+                name="actualizar"
+                class="input100 btn btn-primary"
+                autocomplete="username"
+                aria-required="true"
+                th:if="${cita.nombreTrabajador} == ${#authentication.name}"
+                placeholder="Email"
+                value="ACTIVADO"
+                style="position: relative; right: -1.5em"
+              />
 
-                <span class="symbol-input100">
-                  <i class="fa fa-envelope" aria-hidden="true"></i>
-                </span>
-              </div>
+              <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </span>
+            </div>
 
             <div class="wrap-input100 validate-input">
               <input
@@ -144,20 +194,21 @@
                 aria-required="true"
                 placeholder="Password"
                 type="hidden"
-                th:value = "${cita.idCita}"
+                th:value="${cita.idCita}"
                 style="position: relative; right: -1.5em"
               />
             </div>
 
             <div class="container-login100-form-btn">
-              <input
+              <button
+                onclick="return Actualizar()"
                 style="position: relative; right: -1.5em"
                 type="submit"
                 class="login100-form-btn"
                 name="login-submit"
                 id="login-submit"
                 value="Confirmar"
-              />
+              ></button>
             </div>
           </form>
         </div>

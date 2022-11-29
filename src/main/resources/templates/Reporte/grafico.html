@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gráficos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <!-- Iconos -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <!-- SweertAlert2 -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Google Charts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+        <!-- Dibujar el gráfico -->
+        <script th:inline="javascript">
+            var real_data = /*[[${graphData}]]*/'noValue';
+            $(document).ready(function () {
+                google.charts.load('current', {
+                    packages: ['corechart', 'bar']
+                });
+                google.charts.setOnLoadCallback(drawColumnChart);
+                google.charts.setOnLoadCallback(drawPieChart);
+            });
+            function drawColumnChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Cliente');
+                data.addColumn('number', 'Cantidad');
+                Object.keys(real_data).forEach(function (key) {
+                    data.addRow([key, real_data[key]]);
+                });
+                var options = {
+                    title: 'Cantidad de Ventas por Cliente',
+                    hAxis: {
+                        title: 'Cliente'
+                    },
+                    vAxis: {
+                        title: 'Cantidad'
+                    }
+                };
+                var chart = new google.visualization.ColumnChart(document.getElementById('barras'));
+                chart.draw(data, options);
+            }
+            function drawPieChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Cliente');
+                data.addColumn('number', 'Cantidad');
+                Object.keys(real_data).forEach(function (key) {
+                    data.addRow([key, real_data[key]]);
+                });
+                var options = {
+                    title: 'Cantidad de Ventas por Cliente'
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('circular'));
+                chart.draw(data, options);
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div class="container">  
+
+            <div th:insert="menu :: #menu_buscar"></div>
+
+            <hr>
+
+            <div id="barras"></div>
+            <div id="circular"></div>
+
+        </div>
+
+    </body>
+</html>

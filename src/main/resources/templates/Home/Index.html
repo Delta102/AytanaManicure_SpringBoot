@@ -27,6 +27,7 @@
                     <a sec:authorize="isAuthenticated()" href="#" class="link link--active">Bienvenido 
                         <a th:href="@{trabajador/perfil/(id=${#authentication.name})}">[[${#httpServletRequest.remoteUser}]]!</a>
                     </a>
+                    
                     <a sec:authorize="isAuthenticated()" class="link" a th:href="@{trabajador/registro}">Crear Trabajador</a>
                     <a sec:authorize="!isAuthenticated()" href="#" class="link link--active">Contacto</a>
                     <a sec:authorize="isAuthenticated()" class="link link--active" th:href="@{cita/listaCitas}">Ver citas disponibles</a>

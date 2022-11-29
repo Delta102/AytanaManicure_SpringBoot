@@ -1,6 +1,7 @@
 package com.example.AytanaManicure.Usuario;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public Optional<Usuario> FindById(int id) {
         return data.findById(id);
+    }
+
+    @Override
+    public List<Usuario> Listar() {
+        return (List<Usuario>) data.findAll();
     }
 
 }

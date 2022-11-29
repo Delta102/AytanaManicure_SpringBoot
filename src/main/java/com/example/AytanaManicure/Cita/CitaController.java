@@ -248,4 +248,25 @@ public class CitaController {
         citaService.Eliminar(id);
         return ListarCitasByUser(mail, model);
     }
+
+    /*
+     * @GetMapping("reporte")
+     * public String ReporteGrafico(@RequestParam("mail") String mail, Model model)
+     * {
+     * Map<String, Integer> graphData = new TreeMap<>();
+     * 
+     * List<Usuario> usuarios = userService.Listar();
+     * for (int i = 0; i < usuarios.size(); i++) {
+     * int id = usuarios.get(i).getIdUsuario();
+     * String nom = usuarios.get(i).getNombre() + " " +
+     * usuarios.get(i).getApellido();
+     * List<Cita> ventas = citaService.citasByUser(mail);
+     * int cant = ventas.size();
+     * graphData.put(nom, cant);
+     * }
+     * 
+     * model.addAttribute("graphData", graphData);
+     * return "Reporte/grafico";
+     * }
+     */
 }
