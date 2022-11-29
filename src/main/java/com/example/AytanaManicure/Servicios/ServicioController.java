@@ -34,6 +34,15 @@ public class ServicioController {
         return carpeta + "CrearServicio";
     }
 
+    @GetMapping("eliminar")
+    public String Eliminar(@RequestParam("id") int id, Model model) {
+
+        System.out.println("ELMINAR" + id);
+
+        service.Eliminar(id);
+        return listaServicios(model);
+    }
+
     @PostMapping("/registrarServicio")
     public String registrar(@RequestParam("nService") String nombre, @RequestParam("pService") float precio,
             ModelMap model) {

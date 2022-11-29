@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Listado de Citas</title>
+    <title>Listado de Eventos</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -46,18 +46,52 @@
       crossorigin="anonymous"
     />
 
+    <script>
+      function Eliminar(opcion)
+            {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'Your file has been deleted.',
+                            icon: 'success',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = opcion.href;
+                            }
+                        });
+
+                    }
+                });
+            }
+    </script>
+
   </head>
   <body>
     <div class="limiter">
       <div class="container-login100">
         <div class="wrap-login100">
           <div style="position: relative; top: -100px">
-            <table class="table mb-0">
+            <table class="table">
               <thead>
                 <tr>
                   <th id="fecha">N° de Cita</th>
-                  <th id="evento">Fecha de Cita</th>
-                  <th id="aforo">Hora de Cita</th>
+                  <th id="evento">Fecha y Hora</th>
 
                   <th id="aforo">Trabajador Asignado</th>
 
@@ -71,15 +105,33 @@
               <tbody>
                 <tr th:each="cita,status : ${listaCitas}">
                   <td th:text="${cita.idCita}"></td>
-                  <td th:text="${cita.fechaCita}"></td>
-                  <td th:text="${cita.horaCita}"></td>
-                  <td th:text="${cita.nombreTrabajador}"></td>
-                  <td th:text="${cita.estadoCita}"></td>
-                  <td th:text="${cita.usuario.nombre}"></td>
-                  <td th:text="${cita.proceso.nombreServicio}"></td>
+                  <td th:text="${cita.fechaCita} +' '+ ${cita.horaCita}"></td>
+                  <td>
+                    <div class="btn btn-outline-primary">
+                      <h6 th:text="${cita.nombreTrabajador}"></h6>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="btn btn-outline-warning">
+                      <h6 th:text="${cita.estadoCita}"></h6>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="btn btn-outline-info">
+                      <h6 th:text="${cita.usuario.nombre}"></h6>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="btn btn-outline-danger">
+                      <h6 th:text="${cita.proceso.nombreServicio}"></h6>
+                    </div>
+                  </td>
                   
                   <td>
-                    <a asp-action="Delete" class="btn btn-danger">Eliminar</a>
+                    <a onclick="return Eliminar(this)" th:if="${estado} == 1" th:href="@{eliminar(id=${cita.idCita})}" class="btn btn-danger">Eliminar</a>
                     <a
                       th:if="${cita.nombreTrabajador} == 'SIN TRABAJADOR'" th:href="@{/cita/editarCitaTrabajador(mail=${#authentication.name}, id=${cita.idCita})}"
                       class="btn btn-dark"

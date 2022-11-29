@@ -22,6 +22,11 @@ public class CitaService implements ICitaService {
     }
 
     @Override
+    public void Eliminar(int id) {
+        data.deleteById(id);
+    }
+
+    @Override
     public List<Cita> Listar() {
         return (List<Cita>) data.findAll();
     }

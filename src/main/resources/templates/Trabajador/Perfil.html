@@ -106,8 +106,9 @@
                                                         </h2>
                                                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                             <div class="accordion-body">
-                                                                <a class="login100-form-btn" id="button1" asp-controller="Evento"
-                                                                   asp-action="ListarEventos" asp-route-temp="1" asp-route-idUser="@ViewBag.idUser">VER LAS CITAS</a>
+                                                                <a class="login100-form-btn" id="button1" th:href="@{../../cita/listaCitasPasadasbyUserMail(mail=${#authentication.name})}">
+                                                                    VER LAS CITAS
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>

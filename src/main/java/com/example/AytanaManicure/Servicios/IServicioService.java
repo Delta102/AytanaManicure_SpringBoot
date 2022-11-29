@@ -9,5 +9,7 @@ public interface IServicioService {
 
     public Optional<Servicio> FindById(int id);
 
+    public void Eliminar(int id);
+
     public void Guardar(Servicio s);
 }

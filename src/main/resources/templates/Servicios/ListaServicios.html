@@ -76,7 +76,7 @@
                   <td th:text="${servicio.nombreServicio}"></td>
                   <td th:text="${servicio.precioServicio}"></td>
                   <td>
-                    <a asp-action="Delete" class="btn btn-danger">Eliminar</a>
+                    <a class="btn btn-danger" th:href="@{eliminar(id=${servicio.idServicio})}">Eliminar</a>
                     <a
                       asp-action="ListaAsistentes"
                       asp-controller="RegistroAsistencia"

@@ -25,4 +25,9 @@ public class ServicioService implements IServicioService {
     public Optional<Servicio> FindById(int id) {
         return data.findById(id);
     }
+
+    @Override
+    public void Eliminar(int id) {
+        data.deleteById(id);
+    }
 }

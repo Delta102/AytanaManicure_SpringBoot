@@ -8,4 +8,6 @@ public interface ICitaService {
 
     public Optional<Cita> FindById(int id);
     public void Guardar(Cita c);
+
+    public void Eliminar(int id);
 }

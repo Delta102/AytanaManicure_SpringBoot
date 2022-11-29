@@ -130,6 +130,19 @@ public class CitaController {
         return carpeta + "ActualizarCita";
     }
 
+    @GetMapping("/editarEstadoCita")
+    public String actualizarCitaEstado(@RequestParam("id") int idCita,
+            Model model) {
+
+        var tempCita = citaService.FindById(idCita);
+
+        var cita = tempCita.get();
+
+        model.addAttribute("cita", cita);
+
+        return carpeta + "ActualizarCita";
+    }
+
     @PostMapping("editarTrabajador")
     public String actualizarTrabajador(@RequestParam("actualizar") String nom,
             @RequestParam("idCita") int id,
@@ -142,7 +155,7 @@ public class CitaController {
             cita.setNombreTrabajador(nom);
             citaService.Guardar(cita);
         }
-        if (cita.getEstadoCita().equals("SIN ACTIVAR")) {
+        if (cita.getEstadoCita().equals("SIN ACTIVAR") && nom.equals("ACTIVADO")) {
             cita.setEstadoCita(nom);
             citaService.Guardar(cita);
         }
@@ -172,42 +185,66 @@ public class CitaController {
         return carpeta + "ListaCitas";
     }
 
-    /*
-     * @GetMapping("/editar")
-     * public String Editar(@RequestParam("id") int id, Model model)
-     * {
-     * Optional<Producto> producto = service.ConsultarId(id);
-     * model.addAttribute("producto", producto);
-     * 
-     * List<Categoria> categorias = serviceC.Listar();
-     * model.addAttribute("categorias", categorias);
-     * 
-     * return carpeta+"editar"; //editar.html
-     * }
-     * 
-     * @PostMapping("/actualizar")
-     * public String Actualizar(@RequestParam("id") int id,
-     * 
-     * @RequestParam("nombre") String nom,
-     * 
-     * @RequestParam("descripcion") String desc,
-     * 
-     * @RequestParam("precio") float prec,
-     * 
-     * @RequestParam("cat") Categoria cat,
-     * Model model)
-     * {
-     * Producto p = new Producto();
-     * p.setId(id);
-     * p.setNombre(nom);
-     * p.setDescripcion(desc);
-     * p.setPrecio(prec);
-     * p.setCategoria(cat);
-     * 
-     * service.Guardar(p);
-     * 
-     * return Mostrar(model);
-     * }
-     */
+    @GetMapping("listaCitasPasadasbyUserMail")
+    public String ListarCitasAtendidasByUser(@RequestParam("mail") String mail,
+            Model model) throws ParseException {
 
+        String estado = mail;
+        List<Cita> citas = citaService.Listar();
+        List<Cita> listaCita = new ArrayList<Cita>();
+
+        var fechaActual = LocalDateTime.now();
+
+        var fechaTotal = fechaActual.getYear() + "-" + fechaActual.getMonthValue() + "-" + fechaActual.getDayOfMonth()
+                + " " + fechaActual.getHour() + ":" + fechaActual.getMinute();
+
+        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+
+        Date dateTemp = format.parse(fechaTotal);
+        Date dateCita = new Date();
+
+        for (int i = 0; i < citas.size(); i++) {
+            if (citas.get(i).fechaCita == null || citas.get(i).horaCita == null) {
+                return "Error";
+            } else {
+                var dateTimeCita = citas.get(i).horaCita;
+
+                String[] HoraMinArray = dateTimeCita.split(":");
+                int valorHora = Integer.parseInt(HoraMinArray[0]); // Hora
+                int valorMinutos = Integer.parseInt(HoraMinArray[1]); // Minutos.
+
+                var dateString = citas.get(i).fechaCita;
+                dateCita = format.parse(dateString);
+
+                dateCita.setHours(valorHora);
+                dateCita.setMinutes(valorMinutos);
+
+                System.out.println("DateCita: " + dateCita + "DateTemp: " + dateTemp);
+
+                if (citas.get(i).nombreTrabajador.equals(estado) || dateCita.before(dateTemp))
+                    listaCita.add(citas.get(i));
+
+                valorHora = 0;
+                valorMinutos = 0;
+
+                dateString = null;
+                dateCita = null;
+            }
+        }
+
+        model.addAttribute("estado", 1);
+        model.addAttribute("listaCitas", listaCita);
+        return carpeta + "ListaCitas";
+    }
+
+    @GetMapping("eliminar")
+    public String Eliminar(@RequestParam("id") int id, Model model) {
+
+        var cita = citaService.FindById(id);
+
+        var mail = cita.get().getNombreTrabajador();
+
+        citaService.Eliminar(id);
+        return ListarCitasByUser(mail, model);
+    }
 }
