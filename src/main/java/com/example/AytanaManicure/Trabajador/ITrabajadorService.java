@@ -14,6 +14,8 @@ public interface ITrabajadorService extends UserDetailsService {
 
     public void Eliminar(Long id);
 
+    public Trabajador buscarByEmail(String email);
+
     public List<Trabajador> Buscar(String dato);
     public List<Trabajador> OrdenAscendente();
     public List<Trabajador> OrdenDescendente();

@@ -24,10 +24,15 @@
                     <a sec:authorize="!isAuthenticated()" href="#" text="NUESTROS PRINCIPALES SERVICIOS" class="link link--active">Servicios</a>
                     <a sec:authorize="!isAuthenticated()" href="#" class="link">Proyectos</a>
                     <a sec:authorize="!isAuthenticated()" th:href="@{trabajador/login}" class="link link--active">Iniciar Sesión</a>
-                    <a sec:authorize="isAuthenticated()" href="#" class="link link--active">Bienvenido [[${#httpServletRequest.remoteUser}]]!</a>
+                    <a sec:authorize="isAuthenticated()" href="#" class="link link--active">Bienvenido 
+                        <a th:href="@{trabajador/perfil/(id=${#authentication.name})}">[[${#httpServletRequest.remoteUser}]]!</a>
+                    </a>
                     <a sec:authorize="isAuthenticated()" class="link" a th:href="@{trabajador/registro}">Crear Trabajador</a>
                     <a sec:authorize="!isAuthenticated()" href="#" class="link link--active">Contacto</a>
                     <a sec:authorize="isAuthenticated()" class="link link--active" th:href="@{cita/listaCitas}">Ver citas disponibles</a>
+
+                    <a sec:authorize="isAuthenticated()" href="#" class="link link--active" th:href="@{service/listaServicios}">Administrar Servicios</a>
+                    
                     <a sec:authorize="isAuthenticated()" class="link" th:href="@{trabajador/logout}">Cerrar sesión</a>
                 </div>
             </div>

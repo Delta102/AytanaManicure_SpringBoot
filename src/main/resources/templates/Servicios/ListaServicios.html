@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Listado de Citas</title>
+    <title>Listado de Servicios</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -52,44 +52,36 @@
       <div class="container-login100">
         <div class="wrap-login100">
           <div style="position: relative; top: -100px">
+            
+            <a
+              type="button"
+              class="btn btn-dark"
+              th:href="@{/service/registroServicio}"
+              >Agregar nuevo Servicio</a
+            >
+
             <table class="table mb-0">
               <thead>
                 <tr>
-                  <th id="fecha">N° de Cita</th>
-                  <th id="evento">Fecha de Cita</th>
-                  <th id="aforo">Hora de Cita</th>
-
-                  <th id="aforo">Trabajador Asignado</th>
-
-                  <th id="aforo">Estado de la Cita</th>
-
-                  <th id="aforo">Cliente</th>
-
-                  <th id="aforo">Tipo de Servicio</th>
+                  <th id="numero">#</th>
+                  <th id="fecha">N° de Servicio</th>
+                  <th>Nombre del Servicio</th>
+                  <th>Precio del Servicio</th>
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="cita,status : ${listaCitas}">
-                  <td th:text="${cita.idCita}"></td>
-                  <td th:text="${cita.fechaCita}"></td>
-                  <td th:text="${cita.horaCita}"></td>
-                  <td th:text="${cita.nombreTrabajador}"></td>
-                  <td th:text="${cita.estadoCita}"></td>
-                  <td th:text="${cita.usuario.nombre}"></td>
-                  <td th:text="${cita.proceso.nombreServicio}"></td>
-                  
+                <tr th:each="servicio,status : ${servicios}">
+                  <td th:text="${status.count}"></td>
+                  <td th:text="${servicio.idServicio}"></td>
+                  <td th:text="${servicio.nombreServicio}"></td>
+                  <td th:text="${servicio.precioServicio}"></td>
                   <td>
                     <a asp-action="Delete" class="btn btn-danger">Eliminar</a>
                     <a
-                      th:if="${cita.nombreTrabajador} == 'SIN TRABAJADOR'" th:href="@{/cita/editarCitaTrabajador(mail=${#authentication.name}, id=${cita.idCita})}"
+                      asp-action="ListaAsistentes"
+                      asp-controller="RegistroAsistencia"
                       class="btn btn-dark"
-                      >Asignar Trabajador</a
-                    >
-
-                    <a
-                      th:if="${cita.nombreTrabajador} != 'SIN TRABAJADOR'" th:href="@{/cita/editarEstadoCita(id=${cita.idCita})}"
-                      class="btn btn-dark"
-                      >Actualizar Estado</a
+                      >Ver Lista de asistentes</a
                     >
                   </td>
                 </tr>

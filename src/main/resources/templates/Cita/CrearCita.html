@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Datos Personales</title>
+    <title>Datos de Cita</title>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -50,10 +50,16 @@
               alt="No encontrada"
               class="mockup"
             />
+
+           <div th:if="${fecha}">
+            <div class="alert alert-danger" th:text="${fecha}">
+            </div>
+          </div>
+
           </div>
 
           <form
-            action="agendar"
+            th:action="@{agendar}"
             class="login100-form validate-form"
             id="account"
             method="post"
@@ -61,7 +67,7 @@
             <span class="login100-form-title"> AYTANA-MANICURE </span>
 
             <span class="login100-form-title">
-              Datos Personales
+              Datos de la Cita
             </span>
 
             <div class="wrap-input100 validate-input">
@@ -92,7 +98,11 @@
               </span>
             </div>
 
-
+            <div class="wrap-input100 validate-input">
+              <select style="position: relative; right: -1.5em" class="input100" name="proceso">
+                <option name="proceso" th:each="servicio,status : ${servicios}" th:value="${servicio.idServicio}" th:text="${servicio.nombreServicio}"></option>
+              </select>
+            </div>
 
             <div class="wrap-input100 validate-input">
               <input
@@ -100,11 +110,10 @@
                 class="input100"
                 aria-required="true"
                 placeholder="Trabajador:"
+                type="hidden"
+                value="SIN TRABAJADOR"
                 style="position: relative; right: -1.5em"
               />
-              <span class="symbol-input100">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-              </span>
             </div>
 
 
@@ -114,12 +123,10 @@
                 class="input100"
                 aria-required="true"
                 placeholder="Estado:"
+                type="hidden"
                 value="SIN ACTIVAR"
                 style="position: relative; right: -1.5em"
               />
-              <span class="symbol-input100">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-              </span>
             </div>
 
 
@@ -130,12 +137,10 @@
                 class="input100"
                 aria-required="true"
                 placeholder="Estado:"
+                type="hidden"
                 th:value="${usuario}"
                 style="position: relative; right: -1.5em"
               />
-              <span class="symbol-input100">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-              </span>
             </div>
 
 

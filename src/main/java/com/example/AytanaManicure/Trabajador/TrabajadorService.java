@@ -82,4 +82,9 @@ public class TrabajadorService implements ITrabajadorService{
     public List<Trabajador> OrdenDescendente() {
         return data.OrderDesc();
     }
+
+    @Override
+    public Trabajador buscarByEmail(String email) {
+        return data.buscarEmail(email);
+    }
 }

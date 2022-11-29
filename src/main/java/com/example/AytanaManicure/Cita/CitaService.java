@@ -1,6 +1,7 @@
 package com.example.AytanaManicure.Cita;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,11 @@ public class CitaService implements ICitaService {
     @Override
     public void Guardar(Cita c) {
         data.save(c);
+    }
+
+    @Override
+    public Optional<Cita> FindById(int id) {
+        return data.findById(id);
     }
 
     @Override

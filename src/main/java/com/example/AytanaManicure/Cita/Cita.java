@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.example.AytanaManicure.Servicios.Servicio;
 import com.example.AytanaManicure.Usuario.Usuario;
 
 import lombok.Data;
@@ -27,7 +28,10 @@ public class Cita {
     public String estadoCita;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "idProceso")
+    private Servicio proceso;
 }

@@ -2,10 +2,12 @@ package com.example.AytanaManicure.Trabajador;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RequestMapping("/trabajador/")
@@ -41,4 +43,16 @@ public class ControladorTrabajador {
     public String iniciarSesion() {
         return carpeta + "login";
     }
+
+    @GetMapping("/perfil")
+    public String miPerfil(@RequestParam("id") String mail, Model model) {
+        var trabajador = service.buscarByEmail(mail);
+        model.addAttribute("nombre", trabajador.getNombre());
+        model.addAttribute("apellido", trabajador.getApellidos());
+        model.addAttribute("id", trabajador.getIdUsuario());
+        model.addAttribute("tipo", trabajador.getTipo());
+
+        return carpeta + "Perfil";
+    }
+
 }
