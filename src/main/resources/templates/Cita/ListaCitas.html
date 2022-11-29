@@ -100,6 +100,8 @@
                   <th id="aforo">Cliente</th>
 
                   <th id="aforo">Tipo de Servicio</th>
+
+                  <th id="aforo">Costo de la Cita</th>
                 </tr>
               </thead>
               <tbody>
@@ -127,6 +129,12 @@
                   <td>
                     <div class="btn btn-outline-danger">
                       <h6 th:text="${cita.proceso.nombreServicio}"></h6>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="btn btn-outline-danger">
+                      <h6 th:text="${cita.proceso.precioServicio}"></h6>
                     </div>
                   </td>
                   
