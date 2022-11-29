@@ -199,8 +199,9 @@ public class CitaController {
                 + " " + fechaActual.getHour() + ":" + fechaActual.getMinute();
 
         SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+        SimpleDateFormat format2 = new SimpleDateFormat("YYYY-MM-dd hh:mm");
 
-        Date dateTemp = format.parse(fechaTotal);
+        Date dateTemp = format2.parse(fechaTotal);
         Date dateCita = new Date();
 
         for (int i = 0; i < citas.size(); i++) {
@@ -221,7 +222,7 @@ public class CitaController {
 
                 System.out.println("DateCita: " + dateCita + "DateTemp: " + dateTemp);
 
-                if (citas.get(i).nombreTrabajador.equals(estado) || dateCita.before(dateTemp))
+                if (citas.get(i).nombreTrabajador.equals(estado) && dateCita.before(dateTemp))
                     listaCita.add(citas.get(i));
 
                 valorHora = 0;
